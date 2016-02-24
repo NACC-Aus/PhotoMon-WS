@@ -1,0 +1,9 @@
+
+en:
+  admin:
+    actions:
+      view:
+        title: "Approve Photo"
+        menu: "Photo Viewer"
+        link: "Photo Viewer"
+        breadcrumb: "Photo Viewer"

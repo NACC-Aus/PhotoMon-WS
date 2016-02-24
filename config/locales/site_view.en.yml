@@ -1,0 +1,8 @@
+en:
+  admin:
+    actions:
+      site_view:
+        title: "Viewer"
+        menu: "Viewer"
+        breadcrumb: "Viewer"
+        link: "Viewer"

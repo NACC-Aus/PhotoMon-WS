@@ -1,0 +1,306 @@
+:css
+  .upload {
+    border-top: solid 1px #CCC;
+    / width: 400px;
+    padding-top: 10px;
+    margin-top: 10px;
+    width: 30%;
+    float: left;
+    margin-left: 15px;
+
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .upload .progress {
+    margin-top: 8px;
+    border: solid 1px #555;
+    border-radius: 3px;
+    -moz-border-radius: 3px;
+  }
+
+  .upload .progress .bar {
+    height: 10px;
+    background: #3EC144;
+  }
+
+  .images_uploader {
+    margin-top: -155px;
+    margin-left: 155px;
+  }
+
+  .images_uploader ol{
+    list-style-type: none;
+  }
+
+  #uploads_container {
+    margin-top: 103px;
+  }
+
+  .images-uploaded {
+    / width: 100%;
+    overflow: hidden;
+    margin-left: 180px;
+  }
+
+  .images-uploaded .image-uploaded:nth-child(5n + 1) {
+    clear: both;
+  }
+
+  .image-uploaded {
+    border: solid 1px #CCC;
+    padding: 10px;
+    float: left;
+    margin: 10px 10px;
+    width: 15%;
+  }
+
+  .image-uploaded .frame {
+    width: 100%;
+    height: 100px;
+    overflow: hidden;
+  }
+
+  .image-uploaded .frame img {
+    height: auto;
+    width: auto;
+    max-width: 100%;
+    max-height: 100%;
+    margin: auto;
+    display: block;
+  }
+
+  .image-uploaded .name {
+    padding-top: 5px;
+    text-align: center;
+    font-weight: bold;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .image-uploaded .name span.destroy {
+    margin-left: 10px;
+  }
+
+  .image-uploaded .name span.destroy a {
+    display: inline-block;
+    cursor: pointer;
+    color: red;
+    font-size: 13px;
+  }
+
+  .image-uploaded .image-info label {
+    height: 20px;
+    line-height: 20px;
+  }
+
+  .image-uploaded .image-info textarea {
+    height: 0px;
+    min-height: 20px;
+    margin-bottom: -5px;
+    margin-top: 5px;
+    width: 85%;
+    margin-left: 5px;
+  }
+
+  .image-uploaded .actions {
+    font-size: 10px;
+    text-align: center;
+    color: #777;
+  }
+
+  /Loadmask
+  .loadmask {
+    z-index: 100;
+    position: absolute;
+    top:0;
+    left:0;
+    -moz-opacity: 0.5;
+    opacity: .50;
+    filter: alpha(opacity=50);
+    background-color: #CCC;
+    width: 100%;
+    height: 100%;
+    zoom: 1;
+  }
+
+  .loadmask-msg {
+      z-index: 20001;
+      position: absolute;
+      top: 0;
+      left: 0;
+      border:1px solid #6593cf;
+      background: #c3daf9;
+      padding:2px;
+  }
+  .loadmask-msg div {
+      padding:5px 10px 5px 25px;
+      background: #fbfbfb url('data:image/gif;base64,R0lGODlhEAAQALMMAKqooJGOhp2bk7e1rZ2bkre1rJCPhqqon8PBudDOxXd1bISCef///wAAAAAAAAAAACH/C05FVFNDQVBFMi4wAwEAAAAh+QQFAAAMACwAAAAAEAAQAAAET5DJyYyhmAZ7sxQEs1nMsmACGJKmSaVEOLXnK1PuBADepCiMg/DQ+/2GRI8RKOxJfpTCIJNIYArS6aRajWYZCASDa41Ow+Fx2YMWOyfpTAQAIfkEBQAADAAsAAAAABAAEAAABE6QyckEoZgKe7MEQMUxhoEd6FFdQWlOqTq15SlT9VQM3rQsjMKO5/n9hANixgjc9SQ/CgKRUSgw0ynFapVmGYkEg3v1gsPibg8tfk7CnggAIfkEBQAADAAsAAAAABAAEAAABE2QycnOoZjaA/IsRWV1goCBoMiUJTW8A0XMBPZmM4Ug3hQEjN2uZygahDyP0RBMEpmTRCKzWGCkUkq1SsFOFQrG1tr9gsPc3jnco4A9EQAh+QQFAAAMACwAAAAAEAAQAAAETpDJyUqhmFqbJ0LMIA7McWDfF5LmAVApOLUvLFMmlSTdJAiM3a73+wl5HYKSEET2lBSFIhMIYKRSimFriGIZiwWD2/WCw+Jt7xxeU9qZCAAh+QQFAAAMACwAAAAAEAAQAAAETZDJyRCimFqbZ0rVxgwF9n3hSJbeSQ2rCWIkpSjddBzMfee7nQ/XCfJ+OQYAQFksMgQBxumkEKLSCfVpMDCugqyW2w18xZmuwZycdDsRACH5BAUAAAwALAAAAAAQABAAAARNkMnJUqKYWpunUtXGIAj2feFIlt5JrWybkdSydNNQMLaND7pC79YBFnY+HENHMRgyhwPGaQhQotGm00oQMLBSLYPQ9QIASrLAq5x0OxEAIfkEBQAADAAsAAAAABAAEAAABE2QycmUopham+da1cYkCfZ94UiW3kmtbJuRlGF0E4Iwto3rut6tA9wFAjiJjkIgZAYDTLNJgUIpgqyAcTgwCuACJssAdL3gpLmbpLAzEQA7') no-repeat 5px 5px;
+      line-height: 16px;
+      border:1px solid #a3bad9;
+      color:#222;
+      font:normal 11px tahoma, arial, helvetica, sans-serif;
+      cursor:wait;
+  }
+  .masked {
+      overflow: hidden !important;
+  }
+  .masked-relative {
+      position: relative !important;
+  }
+  .masked-hidden {
+      visibility: hidden !important;
+  }
+
+= rails_admin_form_for @object, :url => bulk_files_upload_path(:model_name => @abstract_model.to_param) , 
+                              :as => @abstract_model.param_key, 
+                              :html => { :multipart => true, :class => "form-horizontal denser", 
+                              :data => { :title => @page_name }, id: "bulk_files_upload" } do |form|
+
+
+  - group = @model_config.create.with(:form => form, :object => @object, :view => self, :controller => controller).visible_groups.first
+  - fields = group.with(:form => form, :object => @object, :view => self, :controller => controller).visible_fields    
+  - fields.each do |field| 
+    - next if [:image].include?(field.name)          
+    = form.field_wrapper_for(field, false) 
+  #photo_image_field.control-group.paperclip_type.image_field
+  
+  .images-uploaded
+
+  %label.control-label{:for => "photo_image"} Photos
+  .controls
+    .toggle
+      
+    %p.help-block Required. photos
+
+  %input{:type => :hidden, :name => 'return_to', :value => (params[:return_to].presence || request.referer)}
+  .form-actions
+    %button.btn.btn-primary{:type => "submit", :name => "_save", :'data-disable-with' => t("admin.form.save")}
+      %i.icon-white.icon-ok
+      = t("admin.form.save")
+
+
+.images_uploader
+  = s3_uploader_form callback_url: "", id: "images-s3-uploader" do
+    %ol
+      %li
+        = file_field_tag :file, multiple: true
+
+      %li
+        %div#uploads_container
+        %script#template-upload{:type => "text/x-tmpl"}
+          .upload{:id => "file-{%=o.unique_id%}"}
+            {%=o.name%}
+            .progress
+              .bar{:style => "width: 0%"}
+
+:javascript
+  if($('#images-s3-uploader').size() > 0){
+    $('#images-s3-uploader').S3Uploader({ 
+      remove_completed_progress_bar: true,
+      allow_multiple_files: true,
+      progress_bar_target: $('#images-s3-uploader #uploads_container'),
+      before_add: function(file){
+        /** 
+        * Note: This callback will not run in IE
+        **/
+        var valid = true;
+        var valid_mine_types = [
+          "image/png", "image/jpg", "image/jpeg", "image/gif"
+        ];
+
+        if(valid_mine_types.indexOf(file.type) > -1 || /(\.|\/)(png|jpg|jpeg|gif)$/i.test(file.name)){
+          valid = true;
+        }else{
+          alert("Only accepts photo files.");
+          valid = false;
+        }
+
+        if(valid && file.size > 104857600){
+          alert("File size can't larger than 100MB.");
+          valid = false;
+        }
+
+        return valid;
+      }
+    });
+
+    $('#images-s3-uploader').bind('s3_uploads_start', function(e, content) {
+      $(".rails_admin").mask("Uploading...");
+      $(".loadmask").attr("style", "z-index: 100; position: absolute; top:0; left:0; -moz-opacity: 0.5; opacity: .50; filter: alpha(opacity=50); background-color: #CCC; width: 100%; height: 100%; zoom: 1;")
+    });
+
+    $('#images-s3-uploader').bind('s3_upload_failed', function(e, content) {
+      // My_CR.hide_loading($("#page"));
+      alert(content.filename + ' failed to upload');
+    });
+
+    $(".images-uploaded").delegate(".image-uploaded a.rm-image-uploaded", {
+      click: function(e){
+        e.preventDefault();
+        var div = $(this).closest(".image-uploaded");
+
+        if(confirm("Are you sure to remove this image?")){
+          div.remove();
+        }
+        return false;
+      }
+    });
+
+    $('#images-s3-uploader').bind('s3_upload_complete', function(e, content) {
+      // My_CR.hide_loading($("#page"));
+      
+      var file = content.file;
+      var reader = new FileReader();
+
+      reader.onload = function (eve) {
+        var b64 = String(eve.target.result);
+        var bin = atob( b64.split( ',' )[1] ); // convert base64 encoding to binary
+        var exif = EXIF.readFromBinaryFile( new BinaryFile( bin ) );
+
+        try{
+          if (exif && (exif.DateTimeOriginal || exif.DateTime)){
+            date = exif.DateTimeOriginal || exif.DateTime;
+            tmp = date.split(" ");
+            tmp[0] = tmp[0].split(":").join("-");
+            date = new Date(tmp[0] + "T" + tmp[1]);
+            
+            // alert(date);
+          }else{
+            date = content.lastModifiedDate;
+          }
+
+          var image_uploaded = "<div class='image-uploaded'>" +
+              "<div class='frame'>" +
+                  " <img src='" + content.url + "'></img>" +
+              "</div>" +
+              "<div class='name'>" + content.filename + 
+                "<span class='destroy' >" +
+                  "<a class='rm-image-uploaded' title='Remove'> X </a>" +
+                "</span>" +
+              "</div>" +
+              "<div class='image-info'>" +
+                "<input id='photo_image_' value='" + content.url + "' name='photo[image][]' type='hidden'>" +
+                
+                "<input id='photo_date_' value='" + date + "'  name='photo[date][]' type='hidden'></input>" +
+
+                "<input id='photo_name_' value='" + content.filename + "'  name='photo[name][]' type='hidden'></input>" +
+              "</div>" +
+            "</div>";
+
+
+          $('.images-uploaded').append($(image_uploaded));
+
+        }catch(e){
+
+        }
+      }
+
+      reader.readAsDataURL(file);
+    });
+
+    $(document).bind('s3_uploads_complete', function(e, content) {
+      setTimeout(function(){ $(".rails_admin").unmask(); }, 1000);
+    });
+
+  }

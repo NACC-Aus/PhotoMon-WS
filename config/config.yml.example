@@ -1,0 +1,10 @@
+development:
+  amazon_access_key: ''
+  amazon_secret: ''
+  bucket: ''
+  google_api_key: ''
+production:
+  amazon_access_key: ''
+  amazon_secret: ''
+  bucket: ''
+  google_api_key: ''

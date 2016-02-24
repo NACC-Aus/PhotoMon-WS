@@ -1,0 +1,34 @@
+- container_id = "#{field.dom_name}-#{Time.now.to_i}-#{rand(9999)}"
+- lat_field_id = "lat-#{container_id}"
+- lng_field_id = "lng-#{container_id}"
+
+- lat =  form.object.latitude || field.default_latitude
+- lng = form.object.send(field.longitude_field) || field.default_longitude
+= javascript_tag do    
+  :plain    
+    function initGoogleMap(){      
+      initMap("#{container_id}",            
+            #{lat},
+            #{lng},
+            "#{lat_field_id}",
+            "#{lng_field_id}"
+            );
+    }   
+    if(!googleMapLoaded){
+      jQuery.getScript("http://maps.googleapis.com/maps/api/js?key=#{field.google_api_key}&sensor=false&libraries=places&callback=initGoogleMap");
+    }else{
+      initGoogleMap();
+    }
+    setTimeout(function(){jQuery("#site_longitude_field").remove();}, 1000);
+%div    
+  %input{:id =>"#{container_id}-address",  :type => 'text', :size => 30}   
+
+%div.ramf-map-container{:id => container_id, :style => "width:420px;height:350px"}
+%div
+  Latitude:
+  %span.current_lat=lat
+  Longitude:
+  %span.current_lng=lng
+  
+= form.send :hidden_field, field.name, :id => lat_field_id, :value => lat
+= form.send :hidden_field, field.longitude_field, :id => lng_field_id, :value => lng

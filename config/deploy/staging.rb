@@ -1,0 +1,1 @@
+server 'staging.domain.com', :app, :web, :primary => true

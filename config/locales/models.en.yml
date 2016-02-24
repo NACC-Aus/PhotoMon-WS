@@ -1,0 +1,9 @@
+en:
+  activerecord:
+    attributes:
+      site:
+        lat: Location
+        lng: Longitude
+      user:
+        read_only: Read Only
+        project_admin: Project Admin

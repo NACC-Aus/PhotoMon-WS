@@ -1,0 +1,21 @@
+
+en:
+  admin:
+    form:
+      accept: "Approve"
+      bulk_accept: 'Are you sure you want to accept the below Photos?'
+    actions:
+      bulk_accept:
+        title: "Accept Photos"
+        menu: "Accept Photos"
+        breadcrumb: "Accept Photos"
+        link: "Accept Photos"
+        bulk_link: "Accept selected %{model_label_plural}"
+        done: "save"
+      accept:
+        title: "Approve Photo"
+        menu: "Approve Photo"
+        breadcrumb: "Approve Photo"
+        link: "Approve Photo"
+        bulk_link: "Approve selected %{model_label_plural}"
+        done: "save"

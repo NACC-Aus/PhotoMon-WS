@@ -1,0 +1,7 @@
+= rails_admin_form_for @object, :url => accept_path(@abstract_model, @object.id), :as => @abstract_model.param_key, :html => { :method => "put", :class => "form-horizontal denser", :data => { :title => @page_name } } do |form|
+  %a{href: @object.image.url(:iphone4)}
+    = image_tag(@object.image.url(:thumb))
+  .form-actions
+    %input.btn.btn-primary{type: :submit, value: 'Accept', 'data-disable-with' => 'Accept', name: 'accept'}      
+    %input.btn.btn-primary{type: :submit, value: 'Reject', 'data-disable-with' => 'Reject', name: 'reject'}
+      

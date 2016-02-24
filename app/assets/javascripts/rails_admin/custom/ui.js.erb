@@ -1,0 +1,129 @@
+//= require jquery-fileupload/basic
+//= require jquery-fileupload/vendor/tmpl
+//= require rails_admin/custom/binaryajax
+//= require rails_admin/custom/exif
+//= require rails_admin/custom/s3_direct_upload
+//= require rails_admin/custom/jquery.loadmask
+//= require rails_admin/custom/upload_photo
+
+function base64ToArrayBuffer (base64) {
+  base64 = base64.replace(/^data\:([^\;]+)\;base64,/gmi, '');
+  var binary_string = window.atob(base64);
+  var len = binary_string.length;
+  var bytes = new Uint8Array( len );
+  for (var i = 0; i < len; i++) {
+      bytes[i] = binary_string.charCodeAt(i);
+  }
+  return bytes.buffer;
+}
+
+var maps = {};
+//make sure google map api only loaded once
+var googleMapLoaded = false;
+var geocoder = null;
+var marker = null;
+var MAP_ZOOM = 15;
+var crosshairShape = {coords:[0,0,0,0],type:'rect'};
+function initMap(mapContainer, lat, lng, latField, lngField){		
+   try{
+   	   googleMapLoaded = true;	   
+	   var map 	 = maps[mapContainer];
+	   if(map){return false;}
+	   geocoder = new google.maps.Geocoder();   
+	  	var latlng = new google.maps.LatLng(lat, lng);
+	  	var myOptions = {
+		    zoom: MAP_ZOOM,
+		    center: latlng,
+		    mapTypeId: google.maps.MapTypeId.ROADMAP
+	  	};
+	  	map = new google.maps.Map(document.getElementById(mapContainer), myOptions);
+	  	
+	  	marker = new google.maps.Marker({	        
+	        map: map,
+	        icon: '<%= asset_path 'cross-hair.gif' %>',
+			shape: crosshairShape
+	  	});	  	
+	  	marker.bindTo('position', map, 'center');
+	  	  		  	
+	  	var address_input = document.getElementById(mapContainer + '-address');
+	  	latLng2Address(latlng, address_input);
+	  	if(address_input){
+	  	  address_input.onkeydown = function(e){        
+          return preventFormSubmit(e,mapContainer);       
+        }  
+	  	}
+	  	
+	 	maps[mapContainer] = {map: map, marker: marker};
+	  jQuery("#" + latField).val(lat);
+		jQuery("#" + lngField).val(lng);
+		jQuery("span.current_lat").html(lat);
+		jQuery("span.current_lng").html(lng);
+	  	google.maps.event.addListener(map, 'center_changed', function(e) {  		 		    	
+		    var latLng = map.getCenter();
+		    //le map.setCenter(e.latLng);
+		    setLatLng(latLng.lat(), latLng.lng(), mapContainer);
+	  	});             
+   }catch(e){
+   	
+   }
+}
+//prevent form submit when user enter on Location field
+function preventFormSubmit(e, mapContainer){	
+  var eve = e || window.event;
+  var keycode = eve.keyCode || eve.which || eve.charCode;
+  if (keycode == 13) {
+  	codeAddress(mapContainer);
+    eve.cancelBubble = true;
+    eve.returnValue = false;
+  	if (eve.stopPropagation) {   
+      eve.stopPropagation();		    
+    }
+    return false;
+  } 
+	  	
+}
+
+//translate lat/lng to Address
+function latLng2Address(latlng, input){
+	geocoder.geocode({'latLng': latlng}, function(results, status) {
+	  if (status == google.maps.GeocoderStatus.OK) {
+	    if (results[1]) {      
+	      input.value = results[1].formatted_address;	      
+	    }
+	  }
+	});
+
+}
+
+function codeAddress(container_id) {
+  var address = $("#"+ container_id + "-address").val();           
+  if(!geocoder){return false;}
+  if(address.indexOf('Sydney, NSW') == -1){
+  	address += ", Sydney, NSW";	
+  }          
+  geocoder.geocode( { 'address': address}, function(results, status) {    
+    if (status == google.maps.GeocoderStatus.OK) {
+      if(!results[0]){return ;}
+   	  var latLng = results[0].geometry.location;     
+      var mapInfo = maps[container_id];
+      mapInfo.map.setCenter(latLng);
+      mapInfo.map.setZoom(MAP_ZOOM);
+      setLatLng(latLng.lat(), latLng.lng(), container_id);	      
+      
+    } else {
+      alert("Geocode was not successful for the following reason: " + status);
+    }
+  });
+}
+
+function setLatLng(lat,lng, container_id){
+	jQuery("#lat-" + container_id).val(lat);
+  jQuery("#lng-" + container_id).val(lng);
+  jQuery("span.current_lat").html(lat);
+  jQuery("span.current_lng").html(lng);
+}
+
+
+
+
+  

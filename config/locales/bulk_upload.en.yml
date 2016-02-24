@@ -1,0 +1,20 @@
+
+en:
+  admin:
+    
+    actions:
+      bulk_upload:
+        title: "Bulk Upload"
+        menu: "Bulk Upload"
+        breadcrumb: "Bulk Upload"
+        link: Bulk Upload"
+       
+        done: "uploaded"
+
+      bulk_files_upload:
+        title: "Bulk Photos Upload"
+        menu: "Bulk Photos Upload"
+        breadcrumb: "Bulk Photos Upload"
+        link: Bulk Photos Upload"
+       
+        done: "uploaded"

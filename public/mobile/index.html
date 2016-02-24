@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title>Donate to Photomon</title>
+		<meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0" />
+		<link rel="stylesheet" href="/mobile/css/style.css"/>      
+	</head>
+	<body >
+		<div class="wrap">
+		<header class="header">
+			<h2>Donate to Photomon</h2>	
+		</header> 
+			<hr class="separator"/>
+			
+		<div class="container">
+			
+				<!-- Image Slider -->
+				<!--
+				<ul id="slider" class="slider">
+			      <li><img src="images/stock/6.jpg" alt="" /></li>
+			      <li><img src="images/stock/2.jpg" alt="" /></li>
+			      <li><img src="images/stock/3.jpg" alt="" /></li>
+			      <li><img src="images/stock/4.jpg" alt="" /></li>
+			      <li><img src="images/stock/5.jpg" alt="" /></li>
+			      <li><img src="images/stock/1.jpg" alt="" /></li>
+			    </ul>
+			    -->
+			<div class="content">
+						
+				
+				
+				<p>Photomon has been developed by the <a href="http://www.nacc.com.au/">Northern Agricultural Catchments Council</a>, a not-for-profit organisation dedicated to natural resource management in Western Australia. If you have found Photomon to be useful for your own purposes then please consider making a donation towards its on-going maintenance. Donations over $2 are tax deductible in Australia. We also welcome your input on what improvements might be included in future app upgrades. Thank you for your support and feedback.</p>
+				
+				<form id="#donate" action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
+				<input type="hidden" name="cmd" value="_donations">
+				<input type="hidden" name="business" value="nacc@nacc.com.au">
+				<input type="hidden" name="lc" value="AU">
+				<input type="hidden" name="item_name" value="Photomon">
+				<div class="option">
+				<label>					
+					<input type="radio" name="amount" value="2.0" />
+					$2					
+				</label>
+				
+				<label>
+					<input type="radio" name="amount" value="5.0" checked='checked'/>
+					$5					
+				</label>
+				<label>
+					<input type="radio" name="amount" value="10.0" />
+					$10					
+				</label>
+				
+				<label>
+					<input type="radio" name="amount" value="20.0" />
+					$20					
+				</label>
+				
+				<label>
+					<input type="radio" name="amount" value="50.0" />
+					$50					
+				</label>			
+				</div>
+				
+				<div class="clearfix"></div>
+				<div style="display:block; margin-top: 15px;">
+				<input type="hidden" name="currency_code" value="AUD">
+				<input type="hidden" name="no_note" value="0">
+				<input type="hidden" name="bn" value="PP-DonationsBF:btn_donateCC_LG.gif:NonHostedGuest">
+				<input type="image" src="https://www.paypalobjects.com/en_AU/i/btn/btn_donateCC_LG.gif" border="0" name="submit" alt="PayPal — The safer, easier way to pay online.">
+				<img alt="" border="0" src="https://www.paypalobjects.com/en_AU/i/scr/pixel.gif" width="1" height="1">
+				</div>
+				</form>
+				
+			</div>
+			<!--
+			<hr class="separator"/>
+			<aside style="display: none">
+				<a name="menu"></a>
+				<ul class="menu">
+					<li class="icon home"><a href="index.html">Home</a></li>
+					<li class="icon info"><a href="about.html">About</a></li>
+					<li class="icon gear"><a href="services.html">Services</a></li>
+					<li class="icon bubble"><a href="contact.html">Contact Us</a></li>
+					<li class="icon add"><a href="referance.html">Referance</a></li>
+				</ul>
+			</aside>
+			-->
+		</div>
+		<hr class="separator"/>
+		<footer class="footer">
+			<p>&copy; 2013 www.nacc.com.au &bull; All Rights Reserved</p>
+			<div class="social" style="visibility: hidden">
+				<a href="#"><img src="images/facebook.png" alt=""></a>
+				<a href="#"><img src="images/twitter.png" alt=""></a>
+				<a href="#"><img src="images/gplus.png" alt=""></a>
+			</div>
+		</footer>		
+		</div>
+		<script src="js/jquery.min.js"></script>
+		<script src="js/slider.min.js"></script>
+		<script>
+		$(function () {
+		
+		  // Slideshow 1
+		  $("#slider").responsiveSlides({
+		    maxwidth: 800,
+		    speed: 800
+		  });
+		
+		});
+		</script> 	
+	
+	</body>
+</html>
