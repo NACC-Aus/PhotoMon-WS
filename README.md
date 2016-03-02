@@ -1,4 +1,4 @@
-= Photomon Web Service
+# Photomon Web Service
 
 Photomon is a smartphone application that has been designed to improve the quality of data collected by environmental photo-monitoring programs. The app has been developed by the NACC with funding from Coastwest.
 
