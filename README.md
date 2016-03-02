@@ -21,6 +21,7 @@ Photomon is covered by the GNU General Public License and as such can be altered
 Photomon Android is covered by the GNU GPL 3.0 License, which can be found here: https://github.com/NACC-Aus/Photomon-Android/blob/master/LICENSE.md
 
 The Photomon iOS app source can be found here: https://github.com/NACC-Aus/PhotoMon-iOS
+
 The Photomon Android app source can be found here: https://github.com/NACC-Aus/Photomon-Android
 
 * Config:
