@@ -1,0 +1,63 @@
+.row-fluid {
+  .span3 {
+    width: 7%;
+  }
+
+  .span9 {
+    width: 90%;
+  }
+}
+
+.accepted-photos td {
+  background-color: #add8e6 !important;
+}
+
+.guide-photos td {
+  background-color: rgba(0, 250, 65, 0.23) !important;
+}
+
+.rotate-buttons {
+  margin-bottom: 20px;
+  text-align: center;
+
+  #rotate-left, #rotate-right {
+    display: inline-block;
+    padding-top: 3px;
+    cursor: pointer;
+    font-size: 30px;
+  }
+
+  #rotate-left {
+    float: left;
+  }
+
+  #rotate-right {
+    float: right;
+  }
+
+  .btn {
+    padding: 7px 40px;
+    font-size: 20px;
+  }
+}
+
+#photo-view {
+    transform-origin: top left; /* IE 10+, Firefox, etc. */
+    -webkit-transform-origin: top left; /* Chrome */
+    -ms-transform-origin: top left; /* IE 9 */
+}
+#photo-view.rotate90 {
+    transform: rotate(90deg) translateY(-100%);
+    -webkit-transform: rotate(90deg) translateY(-100%);
+    -ms-transform: rotate(90deg) translateY(-100%);
+}
+#photo-view.rotate180 {
+    transform: rotate(180deg) translate(-100%,-100%);
+    -webkit-transform: rotate(180deg) translate(-100%,-100%);
+    -ms-transform: rotate(180deg) translateX(-100%,-100%);
+}
+#photo-view.rotate270 {
+    transform: rotate(270deg) translateX(-100%);
+    -webkit-transform: rotate(270deg) translateX(-100%);
+    -ms-transform: rotate(270deg) translateX(-100%);
+}

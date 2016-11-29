@@ -1,0 +1,39 @@
+= content_for :title do
+  Welcome to NACC's Photomon Services database, please log in below
+
+#login_page.body-sign-in
+  .container
+    .panel.panel-default.form-container
+      .panel-body
+        .col-md-12.col-xs-12.margin-xl-bottom
+          = image_tag "nacc-logo-smlx2.png", width: "100%"
+
+        .col-md-12.col-xs-12.margin-xl-bottom.title
+          %h4 Welcome to NACC's Photomon Services database, please log in below
+
+        .col-md-12.col-xs-12
+          = form_for(resource, as: resource_name, url: session_path(resource_name), html: {class: "login", role: "form"}) do |f|
+            = devise_error_messages!
+
+            .form-group
+              %label.sr-only{:for => "user_email"} Email Address
+              = f.email_field :email, class: "form-control input-lg", placeholder: "Email Address", type: "email", :required => "required", "aria-required" => "true", value: params[:email]
+
+            .form-group
+              %label.sr-only{:for => "user_password"} Password
+              = f.password_field :password, class: "form-control input-lg", placeholder: "Password", type: "password", :required => "required", "aria-required" => "true", value: params[:password]
+
+            .form-group#remember_me_group
+              %label.sr-only
+              = f.check_box :remember_me, class: "icheck square-blue"
+              = f.label :remember_me, class: "control-label"
+              %p
+                %i *Not recommended on shared/public computers
+
+            %input.btn.btn-primary.btn-block.btn-lg{type: "submit", value: "SIGN IN"}
+
+      .panel-body.text-center
+        %div
+          = image_tag "logos.png", class: "logo-bottom"
+          %p This project is supported by the Northern Agricultural Catchments Council and jointly funded through WA Dept of Planning’s Coastwest Grants Program, a WA State NRM Program’s Community Capability Grant and the National Landcare Programme.
+          %a.text-muted.text-underline{href: "http://www.nacc.com.au/disclaimer/", target: "_blank"} Disclaimer

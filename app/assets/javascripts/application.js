@@ -14,4 +14,7 @@
 //= require jquery_ujs
 //= require gallery/bootstrap
 //= require gallery/bootstrap-datepicker
+//= require ie
+//= require plugins/icheck
+//= require plugins/jquery.validate
 //= require_tree .

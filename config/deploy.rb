@@ -12,5 +12,5 @@ require 'capistrano/ext/multistage'
 
 set :rails_root, File.expand_path(File.join(File.dirname(__FILE__), '..'))
 set :application, 'nacc2'
-set :repository, 'git@github.com:adriandewitts/NACC-WS.git'
+set :repository, 'git@github.com:NACC-Aus/PhotoMon-WS.git'
 set :user, 'ubuntu'

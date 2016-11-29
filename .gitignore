@@ -52,3 +52,4 @@ _svn
 svn-commit*.tmp
 .project
 /public/system
+/public/assets

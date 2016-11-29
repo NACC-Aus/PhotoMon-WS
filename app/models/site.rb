@@ -8,6 +8,7 @@ class Site
   field :latitude, type: String
   field :longitude, type: String  
   field :gallery_html, type: String
+  field :last_photo_taken, type: DateTime
   has_many :photos, inverse_of: :site, dependent: :delete
    
   has_one :north_guide_photo, class_name: 'Photo', inverse_of: 'north_guide_site'
@@ -22,17 +23,24 @@ class Site
   index({ name: 1 })
   index({ latitude: 1 })
   index({ longitude: 1 })
+
+  before_save do
+    if north_guide_photo || south_guide_photo || east_guide_photo || west_guide_photo  || point_guide_photo
+      self.update_last_photo_taken!(false)
+      true
+    end
+  end
   
   def as_json(options = {})
     hash = {
-     ID: id, 
-     Name: name,
-     Latitude: latitude,
-     Longitude: longitude,
-     slug: slug,
-     ProjectId: project_id.to_s
+      ID: id, 
+      Name: name,
+      Latitude: latitude,
+      Longitude: longitude,
+      slug: slug,
+      ProjectId: project_id.to_s,
+      lastPhotoTaken: last_photo_taken
     }
-    
   end
   
   [:north_guide_photo, :south_guide_photo, :east_guide_photo, :west_guide_photo, :point_guide_photo].each do |method_name|
@@ -47,6 +55,34 @@ class Site
       Photo.where(direction_field => self.id).update_all(direction_field => nil)    
       self.send("#{method_name}=", photo) 
     end    
+  end
+
+  def update_last_photo_taken!(need_save = true)
+    self.last_photo_taken = photos.max(:created_at)
+
+    [:north_guide_photo, :south_guide_photo, :east_guide_photo, :west_guide_photo, :point_guide_photo].each do |method_name|
+      guide_photo = send(method_name)
+      next unless guide_photo && guide_photo.created_at
+
+      if last_photo_taken.nil? || guide_photo.created_at > last_photo_taken
+        self.last_photo_taken = guide_photo.created_at
+      end
+    end
+
+    self.save(validate: false) if need_save
+    true
+  end
+
+  def self.update_last_photo_taken!(site_ids = nil)
+    if site_ids
+      sites = Site.where(:id.in => site_ids)
+    else
+      sites = Site.all
+    end
+
+    sites.each do |site|
+      site.update_last_photo_taken!
+    end
   end
 end
  

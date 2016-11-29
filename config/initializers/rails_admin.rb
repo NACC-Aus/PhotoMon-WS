@@ -6,6 +6,7 @@ require 'rails_admin_accept'
 require 'rails_admin_bulk_accept'
 require 'rails_admin_site_view'
 require 'rails_admin_view'
+require 'rails_admin_rotate_photo'
 require 'rails_admin/config/actions/rails_admin_delete'
 require 'csv_converter'
 
@@ -30,6 +31,7 @@ RailsAdmin.config do |config|
     view
     edit
     delete
+    rotate_photo
   end
 
 
@@ -158,7 +160,7 @@ RailsAdmin.config do |config|
 
   config.model Project do
     list do 
-      [:_id, :name, :domain, :default_gallery_html, :public_gallery].each{|f| field f}
+      [:name, :domain, :default_gallery_html, :public_gallery].each{|f| field f}
     end
     edit do
       field :name 
@@ -188,12 +190,23 @@ RailsAdmin.config do |config|
     configure :user do
       searchable :name
     end
+
     list do
+      items_per_page 100
+
       field :image do
-        :image_s1024_url
+        pretty_value do
+          bindings[:view].tag(:a, href: bindings[:view].view_path(model_name: 'photo', id: bindings[:object].id)) << bindings[:view].tag(:img, src: bindings[:object].thumbnails_url)
+        end
       end
 
-      [:note, :direction, :status].each{|f| field f}
+      [:note, :direction].each{|f| field f}
+
+      field :status do
+        pretty_value do
+          bindings[:view].tag(:p, class: "photo-status", "data-status" => bindings[:object].status, "data-is-guide" => "#{bindings[:object].is_guide? ? '1' : '0'}") << bindings[:object].status
+        end
+      end
 
       field :site do
         searchable [{:site => :name}]
@@ -278,9 +291,14 @@ RailsAdmin.config do |config|
     configure :south_guide_photo
     configure :east_guide_photo
     configure :west_guide_photo
-    # list do
-    #   [:_id, :name, :slugs, :latitude, :longitude, :gallery_html, :project, :north_guide_photo, :south_guide_photo, :west_guide_photo, :east_guide_photo, :uploaded_at, :created_at].each{|f| field f}
-    # end
+    
+    list do
+      items_per_page 100
+      sort_by :last_photo_taken
+
+      [:name, :project, :last_photo_taken].each{|f| field f}
+    end
+    
     edit do
       field :name, :string
       field :project, :belongs_to_association
@@ -360,14 +378,19 @@ RailsAdmin.config do |config|
           !bindings[:object].new_record? && bindings[:view]._current_user.admin?
         end
       end
+
       field :longitude do
         view_helper :hidden_field
         # I added these next two lines to solve this
         label :hidden => true
         help ""
       end
-
     end
+
+    show do
+      [:_id, :name, :project, :last_photo_taken, :slugs, :latitude, :longitude, :gallery_html, :photos, :north_guide_photo, :south_guide_photo, :west_guide_photo, :east_guide_photo, :point_guide_photo].each{|f| field f}
+    end
+
     #include_all_fields
     #field :lng, :string
   end

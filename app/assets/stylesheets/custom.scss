@@ -1,0 +1,58 @@
+.longitude_field{
+  display: none;
+}
+
+.panel-default {
+  border-color: #dddddd;
+}
+
+.panel-default .panel-body + .panel-body {
+  border-top: 1px solid #dddddd;
+}
+
+.margin-bottom {
+  margin-bottom: 10px !important;
+}
+
+.text-underline {
+  text-decoration: underline;
+}
+
+.body-sign-in {
+  font-size: 13px;
+  margin-top: -70px;
+
+  .logo-bottom {
+    width: 100%;
+    margin-top: -15px;
+  }
+}
+
+.body-sign-in .form-container, .body-sign-up .form-container {
+  max-width: 360px;
+  margin: 40px auto 30px; }
+  .body-sign-in .form-container .text-center .form-control, .body-sign-up .form-container .text-center .form-control {
+    text-align: center; }
+
+@media (min-height: 480px) {
+  .body-sign-in .form-container, .body-sign-up .form-container {
+    margin-top: 60px; } }
+@media (min-height: 600px) {
+  .body-sign-in .form-container, .body-sign-up .form-container {
+    margin-top: 120px; } }
+@media (min-height: 700px) {
+  .body-sign-in .form-container, .body-sign-up .form-container {
+    margin-top: 160px; } }
+
+.margin-xl-bottom {
+  margin-bottom: 20px !important;
+}
+
+.title h4 {
+  text-align: center;
+  margin: 0;
+}
+
+#remember_me_group {
+  margin-bottom: 20px;
+}

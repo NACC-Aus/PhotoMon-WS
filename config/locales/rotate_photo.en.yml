@@ -1,0 +1,11 @@
+en:
+  admin:
+    form:
+      rotate_photo: Save
+    actions:
+      rotate_photo:
+        title: "Rotate Photo"
+        menu: "Rotate Photo"
+        breadcrumb: "Rotate Photo"
+        link: Rotate Photo
+        done: "saved"

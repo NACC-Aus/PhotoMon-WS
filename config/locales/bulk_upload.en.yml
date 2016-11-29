@@ -7,7 +7,7 @@ en:
         title: "Bulk Upload"
         menu: "Bulk Upload"
         breadcrumb: "Bulk Upload"
-        link: Bulk Upload"
+        link: "Bulk Upload"
        
         done: "uploaded"
 
@@ -15,6 +15,6 @@ en:
         title: "Bulk Photos Upload"
         menu: "Bulk Photos Upload"
         breadcrumb: "Bulk Photos Upload"
-        link: Bulk Photos Upload"
+        link: "Bulk Photos Upload"
        
         done: "uploaded"

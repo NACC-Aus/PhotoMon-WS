@@ -11,12 +11,13 @@ class Photo
   NORTH = 'North'
   SOUTH = 'South'
   
+  field :rotate, type: Integer, default: 0
   
-  has_mongoid_attached_file :image, styles: {     large: ["1024", :jpg],      
+  has_mongoid_attached_file :image, styles: {     large: ["", :jpg],      
                                                   iphone4: ["640x910#", :jpg], 
                                                   thumb: ["100x100#", :jpg] }, 
                                     convert_options: {all: ["-unsharp 0.3x0.3+5+0", "-quality 90%", "-auto-orient"]}, 
-                                    processors: [:thumbnail] ,
+                                    processors: [:rotator] ,
                                     storage: Rails.env.production? ? :s3 : :filesystem,                    
                                     s3_permissions: :public_read,         
                                     s3_credentials: {access_key_id: CONFIG['amazon_access_key'],
@@ -61,6 +62,23 @@ class Photo
   before_save do |record|
     record.project_id = record.site.project_id if record.site && record.site.project_id
   end
+
+  after_save do |record|
+    # Update site's last_photo_taken
+    if record.created_at_changed?
+      s_ids = record.site_ids
+      Site.delay.update_last_photo_taken!(s_ids) unless s_ids.blank?
+      true
+    end
+  end
+
+  before_destroy do |record|
+    if record.created_at
+      s_ids = record.site_ids
+      Site.delay(run_at: 40.seconds.from_now).update_last_photo_taken!(s_ids) unless s_ids.blank?
+      true
+    end
+  end
   
   #before_image_post_process :update_timestamp
     
@@ -73,12 +91,11 @@ class Photo
                                   {:west_guide_site_id.ne => nil},
                                   {:point_guide_site_id.ne => nil})}
   
-
-index({ direction: 1 })
-index({ status: 1 })
-index({ image_fingerprint: 1 })
-index({ created_at: 1 })
-index({ uploaded_at: 1 })
+  index({ direction: 1 })
+  index({ status: 1 })
+  index({ image_fingerprint: 1 })
+  index({ created_at: 1 })
+  index({ uploaded_at: 1 })
 
   def image_s1024_url
     self.image.url(:large)
@@ -91,7 +108,7 @@ index({ uploaded_at: 1 })
   def new?
     status == NEW
   end
-#38368670  
+
   def accepted?
     status == ACCEPTED
   end
@@ -117,7 +134,24 @@ index({ uploaded_at: 1 })
   end
   
   def name
-    note.blank? ? "#{direction}#{id}" : "#{direction}##{note.truncate(15)}"
+    #note.blank? ? "#{direction}#{id}" : "#{direction}##{note.truncate(15)}"
+    "#{site.try(:name)} #{direction} #{created_at ? created_at.strftime('%d/%m/%y') : ''}"
+  end
+
+  def site_ids
+    s_ids = []
+    s_ids << site_id if site
+    s_ids << north_guide_site_id if north_guide_site
+    s_ids << south_guide_site_id if south_guide_site
+    s_ids << east_guide_site_id if east_guide_site
+    s_ids << west_guide_site_id if west_guide_site
+    s_ids << point_guide_site_id if point_guide_site
+
+    s_ids
+  end
+
+  def is_guide?
+    !!(north_guide_site_id || south_guide_site_id || east_guide_site_id || west_guide_site_id || point_guide_site_id)
   end
   
   def as_json(options = {})

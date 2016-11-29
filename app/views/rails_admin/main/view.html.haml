@@ -1,1 +1,19 @@
-= image_tag(@object.image.url)
+= rails_admin_form_for @object, :url => rotate_photo_path(:model_name => @abstract_model.to_param) , 
+                              :as => @abstract_model.param_key, 
+                              :html => { :multipart => true, :class => "form-horizontal denser", 
+                              :data => { :title => @page_name }, id: "rotate_photo", method: :put } do |form|
+  
+  %input{:type => :hidden, :name => 'angle', :id => 'angle', :value => @object.rotate}
+
+  .rotate-buttons
+    #rotate-left
+      %i.icon-rotate-left{title: "Turn left 90°"}
+
+    %button.btn.btn-primary{:type => "submit", :name => "_rotate_photo", :'data-disable-with' => t("admin.form.rotate_photo")}
+      %i.icon-white.icon-ok
+      = t("admin.form.rotate_photo")
+
+    #rotate-right
+      %i.icon-rotate-right{title: "Turn right 90°"}
+
+  = image_tag(@object.image.url(), id: "photo-view", class: "rotate#{@object.rotate || ''}")
